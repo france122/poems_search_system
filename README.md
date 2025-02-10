@@ -120,4 +120,4 @@ POEMS_SEARCH/
    - 添加知识图谱
 
 ## 贡献
-欢迎提交https://github.com/france122/poems_search_system。
+欢迎提交https://github.com/france122/poems_search_system
