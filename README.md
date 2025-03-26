@@ -65,12 +65,18 @@ POEMS_SEARCH/
 │   └── requirements.txt     # 后端依赖
 │
 └── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   └── PoemSearch.vue  # 主要搜索组件
-    │   ├── App.vue
-    │   └── main.js
-    └── package.json
+│    ├── src/
+│    │   ├── components/
+│    │   │   └── PoemSearch.vue  # 主要搜索组件
+│    │   ├── App.vue
+│    │   └── main.js
+│    └── package.json
+│── demo/
+│    │── components/
+│    ├── html/
+│    ├── css/
+│    ├── js/
+│    └── README.md
 ```
 
 ## 注意事项
