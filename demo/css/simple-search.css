@@ -1,0 +1,137 @@
+.search-simple {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.search-input-container {
+    display: flex;
+    width: 90%;
+    gap: 10px;
+}
+
+.search-item-simple {
+    flex-grow: 1;
+    position: relative;
+}
+
+.search-item-simple::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #8b4513;
+    transition: width 0.3s ease;
+}
+
+.search-item-simple:focus-within::after {
+    width: 100%;
+}
+
+.elegant-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border: 2px solid rgba(139, 69, 19, 0.5);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.elegant-input:focus {
+    border-color: #8b4513;
+    box-shadow: 0 0 15px rgba(139, 69, 19, 0.3);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.btn-search-simple {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #8b4513, #704012);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
+    white-space: nowrap;
+}
+
+.btn-search-simple:hover {
+    background: linear-gradient(135deg, #704012, #5a3010);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 69, 19, 0.4);
+}
+
+.btn-search-simple:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(139, 69, 19, 0.4);
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-right: 5px;
+}
+
+.quick-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.tag-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+    align-self: flex-start;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.quick-tag {
+    padding: 6px 12px;
+    background: rgba(139, 69, 19, 0.1);
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #704012;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-tag:hover {
+    background: rgba(139, 69, 19, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .search-input-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-search-simple {
+        width: 100%;
+    }
+}

@@ -1,0 +1,75 @@
+.daily-poem {
+    text-align: center;
+    margin: 0 auto 40px;
+    padding: 20px 40px;
+    max-width: 800px;
+    background: linear-gradient(to right, rgba(255, 252, 249, 0.8), rgba(255, 252, 249, 0.95), rgba(255, 252, 249, 0.8));
+    color: #5d4037;
+    border-radius: 8px;
+    font-style: normal;
+    font-size: 1.2em;
+    position: relative;
+    letter-spacing: 2px;
+    line-height: 1.8;
+}
+
+.daily-poem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 69, 19, 0.2), transparent);
+}
+
+.daily-poem::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 69, 19, 0.2), transparent);
+}
+
+.daily-poem-label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    padding: 10px 5px;
+    font-size: 0.8em;
+    color: rgba(139, 69, 19, 0.6);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.daily-poem-text {
+    position: relative;
+    display: inline-block;
+}
+
+.daily-poem-text::before,
+.daily-poem-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(139, 69, 19, 0.3);
+}
+
+.daily-poem-text::before {
+    left: -20px;
+}
+
+.daily-poem-text::after {
+    right: -20px;
+}

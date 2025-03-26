@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 诗文助手</title>
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="../css/chat.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI 诗文助手</h1>
+            <p class="subtitle">与AI一起探讨诗词之美</p>
+        </div>
+
+        <div class="chat-area">
+            <div class="chat-box">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="assistant-message">
+                            <div class="avatar">AI</div>
+                            <div class="message-content">您好，我是智能诗歌聊天机器人。请问能帮您什么？</div>
+                        </div>
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <textarea id="userInput" placeholder="请输入您的问题..." rows="1"></textarea>
+                        <button class="send-button" onclick="sendMessage()">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            返回首页
+        </a>
+        <a href="self.html" class="nav-button">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            个人页面
+        </a>
+    </div>
+
+    <!-- 引入配置和脚本文件 -->
+    <script src="../js/config.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+
+</html>

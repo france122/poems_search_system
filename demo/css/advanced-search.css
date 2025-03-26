@@ -1,0 +1,89 @@
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+/* 搜索项标题和输入框 */
+.search-item {
+    margin-bottom: 15px;
+}
+
+/* 情感强度滑块容器样式 */
+#emotion-intensity-container {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 252, 249, 0.9);
+    border-radius: 8px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+}
+
+/* 高级搜索中的标签 */
+.search-grid label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #5d4037;
+}
+
+/* 滑块值的样式 */
+#emotion-intensity-value {
+    display: inline-block;
+    width: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: #8b4513;
+    margin-left: 10px;
+}
+
+/* 高级搜索按钮 */
+.btn-search {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #8b4513, #704012);
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+}
+
+.btn-search:hover {
+    background: linear-gradient(135deg, #704012, #5a3010);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(139, 69, 19, 0.4);
+}
+
+.slider {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #8b4513;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #704012;
+    transform: scale(1.1);
+}

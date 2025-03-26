@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗歌详情 - AI 诗文助手</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: #f5f5f5;
+            /* background-image: url('https://api.dujin.org/bing/1920.php'); */
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .search-results {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .search-title {
+            color: #8b4513;
+            font-size: 1.5em;
+        }
+
+        .search-info {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .poem-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .poem-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .poem-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+        }
+
+        .poem-title {
+            color: #8b4513;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .poem-dynasty {
+            color: #666;
+            font-size: 0.8em;
+            padding: 4px 8px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 4px;
+        }
+
+        .poem-content {
+            color: #333;
+            line-height: 1.8;
+            margin: 15px 0;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .poem-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .poem-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .poem-tag {
+            padding: 2px 8px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #8b4513;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .action-button:hover {
+            color: #704012;
+        }
+
+        .action-button svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .home-button {
+            position: fixed;
+            left: 30px;
+            top: 30px;
+            padding: 12px 20px;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .home-button:hover {
+            background: rgba(112, 64, 18, 0.95);
+            transform: translateY(-2px);
+        }
+
+        .home-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .page-button {
+            padding: 8px 15px;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-button:hover {
+            background: rgba(112, 64, 18, 0.95);
+        }
+
+        .page-button.active {
+            background: #704012;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="home-button">
+        <svg viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        返回首页
+    </a>
+
+    <div class="container">
+        <div class="search-results">
+            <div class="search-header">
+                <div>
+                    <h1 class="search-title">李白的诗词</h1>
+                    <p class="search-info">共找到 10 首相关诗词</p>
+                </div>
+            </div>
+
+            <div class="poem-list">
+                <div class="poem-card">
+                    <div class="poem-title">
+                        <span>将进酒</span>
+                        <span class="poem-dynasty">唐代</span>
+                    </div>
+                    <div class="poem-content">
+                        君不见，黄河之水天上来，奔流到海不复回。<br>
+                        君不见，高堂明镜悲白发，朝如青丝暮成雪。<br>
+                        人生得意须尽欢，莫使金樽空对月。<br>
+                        天生我材必有用，千金散尽还复来。
+                    </div>
+                    <div class="poem-footer">
+                        <div class="poem-tags">
+                            <span class="poem-tag">抒情</span>
+                            <span class="poem-tag">饮酒</span>
+                            <span class="poem-tag">乐</span>
+
+                        </div>
+                        <div class="action-buttons">
+                            <a href="chat.html" class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+                                </svg>
+                                AI解析
+                            </a>
+                            <div class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                                收藏
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="poem-card">
+                    <div class="poem-title">
+                        <span>望庐山瀑布</span>
+                        <span class="poem-dynasty">唐代</span>
+                    </div>
+                    <div class="poem-content">
+                        日照香炉生紫烟，遥看瀑布挂前川。<br>
+                        飞流直下三千尺，疑是银河落九天。
+                    </div>
+                    <div class="poem-footer">
+                        <div class="poem-tags">
+                            <span class="poem-tag">山水</span>
+                            <span class="poem-tag">写景</span>
+                            <span class="poem-tag">好</span>
+
+                        </div>
+                        <div class="action-buttons">
+                            <a href="chat.html" class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+                                </svg>
+                                AI解析
+                            </a>
+                            <div class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                                收藏
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="poem-card">
+                    <div class="poem-title">
+                        <span>蜀道难</span>
+                        <span class="poem-dynasty">唐代</span>
+                    </div>
+                    <div class="poem-content">
+                        噫吁嚱，危乎高哉！<br>
+                        蜀道之难，难于上青天。
+                    </div>
+                    <div class="poem-footer">
+                        <div class="poem-tags">
+                            <span class="poem-tag">山水</span>
+                            <span class="poem-tag">写景</span>
+                            <span class="poem-tag">惊</span>
+                            <span class="poem-tag">惧</span>
+
+
+                        </div>
+                        <div class="action-buttons">
+                            <a href="chat.html" class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+                                </svg>
+                                AI解析
+                            </a>
+                            <div class="action-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                                收藏
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="page-button active">1</button>
+                <button class="page-button">2</button>
+                <button class="page-button">3</button>
+                <button class="page-button">4</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 为诗歌卡片添加点击事件
+        document.querySelectorAll('.poem-card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                // 如果点击的是操作按钮，不进行跳转
+                if (!e.target.closest('.action-buttons')) {
+                    // 获取诗歌标题
+                    const title = this.querySelector('.poem-title span').textContent;
+                    // 跳转到聊天页面并带上诗歌标题参数
+                    window.location.href = `chat.html?poem=${encodeURIComponent(title)}`;
+                }
+            });
+        });
+
+        // 收藏按钮点击事件
+        document.querySelectorAll('.action-button').forEach(button => {
+            if (button.textContent.trim() === '收藏') {
+                button.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    // 切换收藏状态
+                    this.classList.toggle('active');
+                    // 这里可以添加收藏功能的具体实现
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

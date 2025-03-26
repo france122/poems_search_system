@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古诗文检索系统</title>
+    <!-- 引入Google字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/search-common.css">
+    <link rel="stylesheet" href="../css/daily-poem.css">
+    <link rel="stylesheet" href="../css/search-mode-toggle.css">
+    <link rel="stylesheet" href="../css/simple-search.css">
+    <link rel="stylesheet" href="../css/advanced-search.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-box decorative-border">
+            <h1>古诗文检索系统</h1>
+
+            <!-- 每日诗词组件 -->
+            <div id="daily-poem-container"></div>
+
+            <!-- 搜索模式切换组件 -->
+            <div id="search-mode-toggle-container"></div>
+
+            <!-- 简单搜索模块 -->
+            <div id="simple-search-container"></div>
+
+            <!-- 高级搜索模块 -->
+            <div id="advanced-search-container"></div>
+
+            <!-- 高级搜索按钮 -->
+            <button onclick="searchPoems()" class="btn-search" style="display: none;">搜索</button>
+        </div>
+    </div>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="self.html" class="nav-button">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            个人页面
+        </a>
+        <a href="poem_analysis.html" class="nav-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+            </svg>
+            诗文计量分析
+        </a>
+        <a href="chat.html" class="nav-button">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11c1.52 0 3.025-.308 4.42-.895L23 24l-1.895-6.58c.587-1.395.895-2.9.895-4.42C22 5.925 17.075 1 12 1zm0 2c4.97 0 9 4.03 9 9s-4.03 9-9 9c-1.282 0-2.545-.28-3.697-.815L7.197 19.4l-.195-.707-.707-.195-1.785-.515.515 1.785.195.707-.707.195-1.815.525.525-1.815.195-.707.707-.195.185-.054C4.28 14.545 4 13.282 4 12c0-4.97 4.03-9 9-9z" />
+            </svg>
+            AI 诗文助手
+        </a>
+    </div>
+
+    <!-- 引入组件文件 -->
+    <script src="../components/daily-poem.js"></script>
+    <script src="../components/search-mode-toggle.js"></script>
+    <script src="../components/simple-search.js"></script>
+    <script src="../components/advanced-search.js"></script>
+
+    <!-- 引入JavaScript文件 -->
+    <script src="../js/main.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+
+</html>
